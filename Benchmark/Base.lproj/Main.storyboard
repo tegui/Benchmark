@@ -673,14 +673,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Gr-Fm-DbH">
-                                <rect key="frame" x="18" y="233" width="134" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0000000000000000" id="jLH-pV-2SF">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="woe-qc-Id4">
                                 <rect key="frame" x="38" y="197" width="96" height="32"/>
                                 <buttonCell key="cell" type="push" title="Press me" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KrJ-z6-L7Q">
@@ -688,19 +680,64 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4QX-Fq-uoJ">
-                                <rect key="frame" x="38" y="129" width="97" height="32"/>
-                                <buttonCell key="cell" type="push" title="Print Neg" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DH8-h6-DWQ">
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plL-8A-q43">
+                                <rect key="frame" x="214" y="197" width="101" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0qW-Pp-pg1">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvQ-Rd-69b">
+                                <rect key="frame" x="220" y="20" width="240" height="164"/>
+                                <clipView key="contentView" ambiguous="YES" id="tkn-uF-VAp">
+                                    <rect key="frame" x="1" y="1" width="238" height="162"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView ambiguous="YES" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="THF-wW-Ut4">
+                                            <rect key="frame" x="0.0" y="0.0" width="238" height="162"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="238" height="162"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="238" height="162"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="peQ-ow-8qs">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Un2-YV-6cD">
+                                    <rect key="frame" x="223" y="1" width="16" height="162"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KrL-O6-ou4">
+                                <rect key="frame" x="363" y="197" width="103" height="32"/>
+                                <buttonCell key="cell" type="push" title="Read Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8xW-Qo-rgU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Gr-Fm-DbH">
+                                <rect key="frame" x="18" y="239" width="254" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Just Press to Generate Random Numbers" id="jLH-pV-2SF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="printNegativeValuesButton" destination="4QX-Fq-uoJ" id="6x9-Cr-30w"/>
+                        <outlet property="bigTextField" destination="qvQ-Rd-69b" id="Y82-M9-Bdk"/>
                         <outlet property="randomGenerateButton" destination="woe-qc-Id4" id="mCY-FN-ZHj"/>
                         <outlet property="randomNumberLabel" destination="6Gr-Fm-DbH" id="r3L-4b-tji"/>
+                        <outlet property="readDataButton" destination="KrL-O6-ou4" id="6bn-zZ-T4Q"/>
+                        <outlet property="saveDataButton" destination="plL-8A-q43" id="aJp-Dv-cKh"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
