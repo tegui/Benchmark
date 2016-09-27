@@ -34,6 +34,8 @@ class ViewController: NSViewController {
 //    MARK - PERSONAL VARIABLES
     
     var dataArray = [String]()
+    var appStartDate : NSDate?
+    var appEndsDate : NSDate?
     
     var readedDataArrayForInt = [Int]()
     var readedDataArrayForDouble = [Double]()
@@ -186,6 +188,12 @@ extension ViewController {
             type = "DOUBLES"
         }
         
+        appStartDate = NSDate()
+        let appStartCal = NSCalendar.currentCalendar()
+        let comp = appStartCal.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: appStartDate!)
+        self.printInConsoleController("\n-----STARTING APP TEST------")
+        self.printInConsoleController("reading data begins: \(appStartDate!) | \(comp.hour):\(comp.minute):\(comp.second):\(comp.nanosecond)")
+        
         
         let date1 = NSDate()
         let calendar = NSCalendar.currentCalendar()
@@ -209,12 +217,7 @@ extension ViewController {
         }
         
         
-        
-        
-        
         for line in lines {
-            
-            
             if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
                 readedDataArrayForInt.append(Int(line)!)
             } else {
@@ -224,7 +227,6 @@ extension ViewController {
         }
         
         let date2 = NSDate()
-        
         let calendar2 = NSCalendar.currentCalendar()
         let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
         
@@ -233,41 +235,21 @@ extension ViewController {
     
 //        self.test()
         self.sum(readedDataArrayForInt)
-    }
-
-
-    func test() {
-    
-        let date1 = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        self.res(readedDataArrayForInt)
+        self.mult(readedDataArrayForInt)
+        self.div(readedDataArrayForInt)
         
-        self.printInConsoleController("\n@@@@ TO BEGIN TEST -------------\n")
+        appEndsDate = NSDate()
+        let appEndsCal = NSCalendar.currentCalendar()
+        let comp2 = appEndsCal.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: appEndsDate!)
+        self.printInConsoleController("\n-----ENDING APP TEST------")
+        self.printInConsoleController("reading data Ending: \(appEndsDate!) | \(comp2.hour):\(comp2.minute):\(comp2.second):\(comp2.nanosecond)")
         
-        self.printInConsoleController("Test begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
-        var sds = [String]()
         
-        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
-            for it in readedDataArrayForInt {
-                sds.append("\(it)")
-            }
-        } else {
-            for it in readedDataArrayForDouble {
-                sds.append("\(it)")
-            }
-        }
-        
-            
-        let date2 = NSDate()
-        let calendar2 = NSCalendar.currentCalendar()
-        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
-        
-        self.printInConsoleController("Test ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
-        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+        self.printInConsoleController("difference: \(appEndsDate!.hoursFrom(appStartDate!)):\(appEndsDate!.minutesFrom(appStartDate!)):\(appEndsDate!.secondsFrom(appStartDate!)):\(appEndsDate!.nanoSecondsFrom(appStartDate!))")
         
     }
-
     
     
     
@@ -400,62 +382,151 @@ extension ViewController {
     
     func sum(data: [AnyObject]) {
         
-        print("empezará suma")
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("\n@@@@ Begining Sum -------------\n")
+        
+        self.printInConsoleController("Sum begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        
         if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
             
             print("data:", data.count)
-            print(((data[3] as! Int) + 1))
         
-            var sum = Int()
+            var sum = Double()
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
-                    sum = (data[i] as! Int) + (data[i] as! Int)
+                    sum = Double(data[i] as! Int) + Double(data[i] as! Int)
                     break
                 }
-                print(((data[i] as! Int) + 1))
-                print(((data[i + 1] as! Int) + 1))
-                sum = (data[i] as! Int) + (data[i + 1] as! Int)
+                sum = Double(data[i] as! Int) + Double(data[i + 1] as! Int)
 //                No cabe el Int
             }
-            
-            print("terminó")
         } else {
             
         }
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
         
+        self.printInConsoleController("Sum Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
     }
     
     func mult(data: [AnyObject]) {
-        var bla = [AnyObject]()
         
-        if control == "INT" {
-            bla = data as! [Int]
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("\n@@@@ Begining Mult -------------\n")
+        
+        self.printInConsoleController("Mult begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+            
+            print("data:", data.count)
+            
+            var sum = Double()
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    sum = Double(data[i] as! Int) * Double(data[i] as! Int)
+                    break
+                }
+                sum = Double(data[i] as! Int) * Double(data[i + 1] as! Int)
+            }
         } else {
-            bla = data as! [Double]
+            
         }
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
+        
+        self.printInConsoleController("Mult Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
         
         
         
     }
     
     func div(data: [AnyObject]) {
-        var bla = [AnyObject]()
         
-        if control == "INT" {
-            bla = data as! [Int]
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("\n@@@@ Begining Div -------------\n")
+        
+        self.printInConsoleController("Div begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+            
+            print("data:", data.count)
+            
+            var sum = Double()
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    sum = Double(data[i] as! Int) / Double(data[i] as! Int)
+                    break
+                }
+                sum = Double(data[i] as! Int) / Double(data[i + 1] as! Int)
+            }
         } else {
-            bla = data as! [Double]
+            
         }
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
+        
+        self.printInConsoleController("Div Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+        
+        
     }
     
     func res(data: [AnyObject]) {
-        var bla = [AnyObject]()
         
-        if control == "INT" {
-            bla = data as! [Int]
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("\n@@@@ Begining Substraction -------------\n")
+        
+        self.printInConsoleController("Substraction begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+            
+            print("data:", data.count)
+            
+            var sum = Double()
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    sum = Double(data[i] as! Int) - Double(data[i] as! Int)
+                    break
+                }
+                sum = Double(data[i] as! Int) - Double(data[i + 1] as! Int)
+            }
         } else {
-            bla = data as! [Double]
+            
         }
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
+        
+        self.printInConsoleController("Substraction Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
     }
     
 }
