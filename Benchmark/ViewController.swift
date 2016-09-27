@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+import Darwin
 
 class ViewController: NSViewController {
 
@@ -16,9 +16,9 @@ class ViewController: NSViewController {
     
 //    MARK - IBOUTLETS VARS
     
-    @IBOutlet weak var randomNumberLabel: NSTextField!
-    
     @IBOutlet weak var randomGenerateButton: NSButton!
+    
+    @IBOutlet weak var randomGenerateButtomDouble: NSButton!
     
     @IBOutlet weak var saveDataButton: NSButton!
     
@@ -26,12 +26,20 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var readDataButton: NSButton!
     
+    @IBOutlet weak var comboBox: NSComboBox!
+    
+    
+    
     
 //    MARK - PERSONAL VARIABLES
     
     var dataArray = [String]()
     
-    var readedDataArray = [Int]()
+    var readedDataArrayForInt = [Int]()
+    var readedDataArrayForDouble = [Double]()
+    let texV = NSTextView(frame: CGRectMake(0, 0, 200,200))
+    
+    var control = ""
     
     
     
@@ -40,9 +48,12 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
 //        FIRST STEP, GENERATE N RANDOM NUMBERS
-        
+
         randomGenerateButton.target = self
         randomGenerateButton.action = #selector(generateNewNumber)
+        
+        randomGenerateButtomDouble.target = self
+        randomGenerateButtomDouble.action = #selector(generateDoubleNumbers)
         
         
 //        SECOND STEP, SAVE AND LOAD
@@ -55,7 +66,8 @@ class ViewController: NSViewController {
         
         
 //        THIRD STEP, GET METRICS...
-        
+        texV.frame = self.bigTextField.frame
+        bigTextField.documentView = texV
         
     }
 
@@ -68,35 +80,35 @@ class ViewController: NSViewController {
     
     func generateNewNumber() {
         
-//        GETTING CURRENT DATE/TIME
-        var cDate = self.getCurrentTime()
-        print("Start time: ", cDate)
+        
+        control = "INT"
+        self.dataArray.removeAll()
+
+        self.printInConsoleController("\n@ GENERATING 10000000 INT VALUES ---------")
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("Generating Int Values Start: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
         
         
         for _ in 1...10000000 {
             let randomNum = self.random64(Int64.max)
             self.dataArray.append("\(randomNum)")
         }
-        cDate = self.getCurrentTime()
         
-        print("\nThe DataArray size is: ", self.dataArray.count, " and the last value is: ", self.dataArray[self.dataArray.count - 1])
-        print("\nFinal time: ", cDate)
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("Generating Int Values End: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+        
         
     }
-    
-    
-//    GETTING CURRENT DATE
-    func getCurrentTime() -> String {
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date)
-        let hour = components.hour
-        let minute = components.minute
-        let second = components.second
-        let nanosecond = components.nanosecond
-        return "\(hour):\(minute):\(second):\(nanosecond)"
-    }
-
     
 
 //    GENERATING RANDOM INT64 NUMBER
@@ -111,19 +123,7 @@ class ViewController: NSViewController {
         
         return rnd % upper_bound
     }
-    
-    
-//    RETURN THE DIFFERENCE BETWEEN TWO DATES
-    func getTime(startTime: NSDate, endTime: NSDate) {
-        
-        
-        let calendar = NSCalendar(calendarIdentifier: "gregorian")
-        let components : NSDateComponents = (calendar?.components(.NSCalendarCalendarUnit, fromDate: startTime, toDate: endTime, options: NSCalendarOptions()))!
-        
-        
-        
-    
-    }
+
     
     
     
@@ -134,9 +134,17 @@ extension ViewController {
 
     func writeFile() {
         
-        let strings = dataArray
-        let file = "file.txt"
         
+        let strings = dataArray
+        var file = "file.txt"
+        if control == "INT" {
+            file = "IntFile.txt"
+        } else if (control == "DOUBLE") {
+            file = "DoubleFile.txt"
+        } else {
+            printInConsoleController("Error Saving Data, please Generate Data")
+            return
+        }
         
         let joinedString = strings.joinWithSeparator("\n")
         
@@ -151,12 +159,43 @@ extension ViewController {
             }
         }
         
+        
+        
+        
+        
+        
+        
     }
     
     
     func readData() {
         
-        let file = "file.txt" //this is the file. we will write to and read from it
+        var file = "file.txt" //this is the file. we will write to and read from it
+        
+        if (comboBox.objectValueOfSelectedItem == nil) {
+            printInConsoleController("Error Reading, please select any data type")
+            return
+        }
+        var type = String()
+        
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+            file = "IntFile.txt"
+            type = "INTS"
+        } else if ((comboBox.objectValueOfSelectedItem as! String) == "Double") {
+            file = "DoubleFile.txt"
+            type = "DOUBLES"
+        }
+        
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("\n@READING \(type) ----------\n")
+        self.printInConsoleController("reading data begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        
+        
         var lines = [String]()
         
         if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
@@ -164,20 +203,36 @@ extension ViewController {
             
             do {
                 let text2 = try NSString(contentsOfURL: path, encoding: NSUTF8StringEncoding)
-                let texV = NSTextView(frame: CGRectMake(0, 0, 200,200))
-                texV.textStorage?.appendAttributedString(NSAttributedString(string: text2 as String))
-    
-                bigTextField.documentView = texV
                 lines = text2.componentsSeparatedByString("\n")
             }
             catch {/* error handling here */}
         }
         
+        
+        
+        
+        
         for line in lines {
-            readedDataArray.append(Int(line)!)
+            
+            
+            if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+                readedDataArrayForInt.append(Int(line)!)
+            } else {
+                readedDataArrayForDouble.append(Double(line)!)
+            }
+            
         }
-        print("@@@@ TO BEGIN TEST -------------")
-        self.test()
+        
+        let date2 = NSDate()
+        
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
+        
+        self.printInConsoleController("reading data ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+    
+//        self.test()
+        self.sum(readedDataArrayForInt)
     }
 
 
@@ -187,39 +242,41 @@ extension ViewController {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
         
-        let nanosecond = components.nanosecond
-        print(date1, " | ", nanosecond , " mili: ", date1.timeIntervalSince1970 * 1000)
+        self.printInConsoleController("\n@@@@ TO BEGIN TEST -------------\n")
+        
+        self.printInConsoleController("Test begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
         var sds = [String]()
-        for it in readedDataArray {
-            sds.append("\(it)")
+        
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+            for it in readedDataArrayForInt {
+                sds.append("\(it)")
+            }
+        } else {
+            for it in readedDataArrayForDouble {
+                sds.append("\(it)")
+            }
         }
-        for it in readedDataArray {
-            sds.append("\(it)")
-        }
-        for it in readedDataArray {
-            sds.append("\(it)")
-        }
-        for it in readedDataArray {
-            sds.append("\(it)")
-        }
+        
             
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
         let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
         
-        let nanosecond2 = components2.nanosecond
-        print(date2, " | ", nanosecond2, " mili: ", date2.timeIntervalSince1970 * 1000)
-        
-        
-        print(date2.hoursFrom(date1))
-        print(date2.minutesFrom(date1))
-        print(date2.secondsFrom(date1))
-        print(date2.nanoSecondsFrom(date1))
+        self.printInConsoleController("Test ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
         
     }
 
-
-
+    
+    
+    
+    func printInConsoleController(text: String) {
+        texV.textStorage?.appendAttributedString(NSAttributedString(string: "\(text)\n"))
+        print("\(text)\n")
+    }
+    
+    
 }
 
 
@@ -266,3 +323,142 @@ extension NSDate {
         return ""
     }
 }
+
+
+
+
+
+//    DOUBLE MODULE
+
+extension ViewController {
+    
+
+    func generateDoubleNumbers() {
+        
+        control = "DOUBLE"
+        self.dataArray.removeAll()
+
+        self.printInConsoleController("\n@ GENERATING 10000000 DOUBLE VALUES ---------")
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("Generating Double Values Start: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        
+        for _ in 1...10000000 {
+            let randomNum = self.randomDouble(DBL_MAX)
+            self.dataArray.append("\(randomNum)")
+        }
+        
+        
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("Generating Double Values End: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+        
+        
+    }
+    
+    
+    func randomDouble(upper_bound: Double) -> Double {
+        // Generate 64-bit random value in a range that is
+        // divisible by upper_bound:
+        let range = DBL_MAX - DBL_MIN % upper_bound
+        var rnd : Double = 0
+        repeat {
+            arc4random_buf(&rnd, sizeofValue(rnd))
+        } while rnd >= range
+        
+        return rnd % upper_bound
+    }
+    
+}
+
+
+
+
+//  MATH MODULE AND QUICKSORT
+extension ViewController {
+
+    func quickSort(data: [AnyObject]) {
+        var bla = [AnyObject]()
+        
+        if control == "INT" {
+            bla = data as! [Int]
+        } else {
+            bla = data as! [Double]
+        }
+        
+        
+    }
+    
+    
+    func sum(data: [AnyObject]) {
+        
+        print("empezará suma")
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+            
+            print("data:", data.count)
+            print(((data[3] as! Int) + 1))
+        
+            var sum = Int()
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    sum = (data[i] as! Int) + (data[i] as! Int)
+                    break
+                }
+                print(((data[i] as! Int) + 1))
+                print(((data[i + 1] as! Int) + 1))
+                sum = (data[i] as! Int) + (data[i + 1] as! Int)
+//                No cabe el Int
+            }
+            
+            print("terminó")
+        } else {
+            
+        }
+        
+    }
+    
+    func mult(data: [AnyObject]) {
+        var bla = [AnyObject]()
+        
+        if control == "INT" {
+            bla = data as! [Int]
+        } else {
+            bla = data as! [Double]
+        }
+        
+        
+        
+    }
+    
+    func div(data: [AnyObject]) {
+        var bla = [AnyObject]()
+        
+        if control == "INT" {
+            bla = data as! [Int]
+        } else {
+            bla = data as! [Double]
+        }
+    }
+    
+    func res(data: [AnyObject]) {
+        var bla = [AnyObject]()
+        
+        if control == "INT" {
+            bla = data as! [Int]
+        } else {
+            bla = data as! [Double]
+        }
+    }
+    
+}
+
+
+

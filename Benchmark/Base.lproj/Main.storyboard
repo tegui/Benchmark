@@ -654,7 +654,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="669" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
                     <connections>
@@ -663,86 +663,98 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="169.5" y="250"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Benchmark" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="669" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="woe-qc-Id4">
-                                <rect key="frame" x="38" y="197" width="96" height="32"/>
-                                <buttonCell key="cell" type="push" title="Press me" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KrJ-z6-L7Q">
+                                <rect key="frame" x="15" y="117" width="186" height="32"/>
+                                <buttonCell key="cell" type="push" title="Generate Int Values" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KrJ-z6-L7Q">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plL-8A-q43">
-                                <rect key="frame" x="214" y="197" width="101" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0qW-Pp-pg1">
+                                <rect key="frame" x="15" y="13" width="186" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save Random Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0qW-Pp-pg1">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="systemBold"/>
                                 </buttonCell>
                             </button>
                             <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvQ-Rd-69b">
-                                <rect key="frame" x="220" y="20" width="240" height="164"/>
-                                <clipView key="contentView" ambiguous="YES" id="tkn-uF-VAp">
-                                    <rect key="frame" x="1" y="1" width="238" height="162"/>
+                                <rect key="frame" x="220" y="20" width="429" height="164"/>
+                                <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="tkn-uF-VAp">
+                                    <rect key="frame" x="1" y="1" width="427" height="162"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView ambiguous="YES" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="THF-wW-Ut4">
-                                            <rect key="frame" x="0.0" y="0.0" width="238" height="162"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="427" height="162"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="238" height="162"/>
+                                            <size key="minSize" width="427" height="162"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="238" height="162"/>
+                                            <size key="minSize" width="427" height="162"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="peQ-ow-8qs">
                                     <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Un2-YV-6cD">
-                                    <rect key="frame" x="223" y="1" width="16" height="162"/>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="Un2-YV-6cD">
+                                    <rect key="frame" x="412" y="1" width="16" height="162"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KrL-O6-ou4">
-                                <rect key="frame" x="363" y="197" width="103" height="32"/>
-                                <buttonCell key="cell" type="push" title="Read Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8xW-Qo-rgU">
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRM-LE-2T2">
+                                <rect key="frame" x="15" y="87" width="186" height="32"/>
+                                <buttonCell key="cell" type="push" title="Generate Double Values" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="K2J-1R-XG5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Gr-Fm-DbH">
-                                <rect key="frame" x="18" y="239" width="254" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Just Press to Generate Random Numbers" id="jLH-pV-2SF">
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KrL-O6-ou4">
+                                <rect key="frame" x="325" y="194" width="218" height="32"/>
+                                <buttonCell key="cell" type="push" title="Read Data and Run Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8xW-Qo-rgU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                </buttonCell>
+                            </button>
+                            <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akc-LZ-gJZ">
+                                <rect key="frame" x="331" y="226" width="209" height="26"/>
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="2" id="H0z-Wb-EHZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <objectValues>
+                                        <string>Integer</string>
+                                        <string>Double</string>
+                                    </objectValues>
+                                </comboBoxCell>
+                            </comboBox>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="bigTextField" destination="qvQ-Rd-69b" id="Y82-M9-Bdk"/>
+                        <outlet property="comboBox" destination="Akc-LZ-gJZ" id="84M-Gs-Qp4"/>
+                        <outlet property="randomGenerateButtomDouble" destination="qRM-LE-2T2" id="z8r-9c-ES3"/>
                         <outlet property="randomGenerateButton" destination="woe-qc-Id4" id="mCY-FN-ZHj"/>
-                        <outlet property="randomNumberLabel" destination="6Gr-Fm-DbH" id="r3L-4b-tji"/>
                         <outlet property="readDataButton" destination="KrL-O6-ou4" id="6bn-zZ-T4Q"/>
                         <outlet property="saveDataButton" destination="plL-8A-q43" id="aJp-Dv-cKh"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="169.5" y="781"/>
         </scene>
     </scenes>
 </document>
