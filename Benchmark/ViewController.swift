@@ -233,11 +233,22 @@ extension ViewController {
         self.printInConsoleController("reading data ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
         self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
     
-//        self.test()
-        self.sum(readedDataArrayForInt)
-        self.res(readedDataArrayForInt)
-        self.mult(readedDataArrayForInt)
-        self.div(readedDataArrayForInt)
+        
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+            self.sum(readedDataArrayForInt)
+            self.res(readedDataArrayForInt)
+            self.mult(readedDataArrayForInt)
+            self.div(readedDataArrayForInt)
+            self.quickSortLaunch(readedDataArrayForInt)
+        } else {
+            self.sum(readedDataArrayForDouble)
+            self.res(readedDataArrayForDouble)
+            self.mult(readedDataArrayForDouble)
+            self.div(readedDataArrayForDouble)
+            self.quickSortLaunch(readedDataArrayForDouble)
+        }
+        
+        
         
         appEndsDate = NSDate()
         let appEndsCal = NSCalendar.currentCalendar()
@@ -367,17 +378,107 @@ extension ViewController {
 //  MATH MODULE AND QUICKSORT
 extension ViewController {
 
-    func quickSort(data: [AnyObject]) {
-        var bla = [AnyObject]()
+    func quickSortLaunch(data: [AnyObject]) {
         
-        if control == "INT" {
-            bla = data as! [Int]
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("\n@@@@ Begining QuickSort -------------\n")
+        
+        self.printInConsoleController("First Sorting Descending: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
+        
+            self.readedDataArrayForInt = self.readedDataArrayForInt.sort() { $0 > $1}
+            
+            let date2 = NSDate()
+            let calendar2 = NSCalendar.currentCalendar()
+            let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
+            
+            self.printInConsoleController("Sorting Descending Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+            
+            self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+            
+            
+            
+            
+            let date3 = NSDate()
+            let calendar3 = NSCalendar.currentCalendar()
+            let components3 = calendar3.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date3)
+            
+            self.printInConsoleController("\n@@@@ Begining QuickSort -------------\n")
+            
+            self.printInConsoleController("Start QuickSort: \(date3) | \(components3.hour):\(components3.minute):\(components3.second):\(components3.nanosecond)")
+            
+            let dt = data as! [Int]
+            let _ = self.quicksort(dt)
+            
+            
+            let date4 = NSDate()
+            let calendar4 = NSCalendar.currentCalendar()
+            let components4 = calendar4.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date4)
+            
+            
+            self.printInConsoleController("End QuickSort: \(date4) | \(components4.hour):\(components4.minute):\(components4.second):\(components4.nanosecond)")
+            self.printInConsoleController("difference: \(date4.hoursFrom(date3)):\(date4.minutesFrom(date3)):\(date4.secondsFrom(date3)):\(date4.nanoSecondsFrom(date3))")
+            
+            
         } else {
-            bla = data as! [Double]
+            self.readedDataArrayForInt = self.readedDataArrayForInt.sort() { $0 > $1}
+            
+            let date2 = NSDate()
+            let calendar2 = NSCalendar.currentCalendar()
+            let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
+            
+            self.printInConsoleController("Sorting Descending Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+            
+            self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+            
+            
+            
+            
+            let date3 = NSDate()
+            let calendar3 = NSCalendar.currentCalendar()
+            let components3 = calendar3.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date3)
+            
+            self.printInConsoleController("\n@@@@ Begining QuickSort -------------\n")
+            
+            self.printInConsoleController("Start QuickSort: \(date3) | \(components3.hour):\(components3.minute):\(components3.second):\(components3.nanosecond)")
+            
+            let dt = data as! [Double]
+            let _ = self.quicksort(dt)
+            
+            
+            let date4 = NSDate()
+            let calendar4 = NSCalendar.currentCalendar()
+            let components4 = calendar4.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date4)
+            
+            
+            self.printInConsoleController("End QuickSort: \(date4) | \(components4.hour):\(components4.minute):\(components4.second):\(components4.nanosecond)")
+            self.printInConsoleController("difference: \(date4.hoursFrom(date3)):\(date4.minutesFrom(date3)):\(date4.secondsFrom(date3)):\(date4.nanoSecondsFrom(date3))")
         }
         
         
+        
+        
     }
+    
+    
+    func quicksort<T: Comparable>(_ a: [T]) -> [T] {
+        guard a.count > 1 else { return a }
+        
+        let pivot = a[1]
+        let less = a.filter { $0 < pivot }
+        let equal = a.filter { $0 == pivot }
+        let greater = a.filter { $0 > pivot }
+        
+        return quicksort(less) + equal + quicksort(greater)
+    }
+    
+    
     
     
     func sum(data: [AnyObject]) {
@@ -391,11 +492,6 @@ extension ViewController {
         
         self.printInConsoleController("Sum begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
-        
-        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
-            
-            print("data:", data.count)
-        
             var sum = Double()
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
@@ -403,11 +499,8 @@ extension ViewController {
                     break
                 }
                 sum = Double(data[i] as! Int) + Double(data[i + 1] as! Int)
-//                No cabe el Int
             }
-        } else {
-            
-        }
+        
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
         let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
@@ -429,10 +522,6 @@ extension ViewController {
         self.printInConsoleController("Mult begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
         
-        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
-            
-            print("data:", data.count)
-            
             var sum = Double()
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
@@ -441,9 +530,7 @@ extension ViewController {
                 }
                 sum = Double(data[i] as! Int) * Double(data[i + 1] as! Int)
             }
-        } else {
-            
-        }
+        
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
         let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
@@ -467,10 +554,6 @@ extension ViewController {
         self.printInConsoleController("Div begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
         
-        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
-            
-            print("data:", data.count)
-            
             var sum = Double()
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
@@ -479,9 +562,7 @@ extension ViewController {
                 }
                 sum = Double(data[i] as! Int) / Double(data[i + 1] as! Int)
             }
-        } else {
-            
-        }
+        
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
         let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
@@ -505,10 +586,6 @@ extension ViewController {
         self.printInConsoleController("Substraction begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
         
-        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
-            
-            print("data:", data.count)
-            
             var sum = Double()
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
@@ -517,9 +594,7 @@ extension ViewController {
                 }
                 sum = Double(data[i] as! Int) - Double(data[i + 1] as! Int)
             }
-        } else {
-            
-        }
+        
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
         let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
@@ -527,6 +602,7 @@ extension ViewController {
         self.printInConsoleController("Substraction Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
         
         self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
+        
     }
     
 }
