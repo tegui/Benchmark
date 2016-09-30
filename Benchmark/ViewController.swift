@@ -50,14 +50,15 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 //        FIRST STEP, GENERATE N RANDOM NUMBERS
 
+        print(Int32.max)
+        print(Int.max)
+        
         randomGenerateButton.target = self
         randomGenerateButton.action = #selector(generateNewNumber)
         
         randomGenerateButtomDouble.target = self
         randomGenerateButtomDouble.action = #selector(generateDoubleNumbers)
         
-        print(Int.max)
-        print(Int64.max)
 //        SECOND STEP, SAVE AND LOAD
         
         saveDataButton.target = self
@@ -97,7 +98,7 @@ class ViewController: NSViewController {
         
         
         for _ in 1...10000000 {
-            let randomNum = self.random64(Int64.max)
+            let randomNum = self.random64(Int32.max)
             self.dataArray.append("\(randomNum)")
         }
         
@@ -114,11 +115,11 @@ class ViewController: NSViewController {
     
 
 //    GENERATING RANDOM INT64 NUMBER
-    func random64(upper_bound: Int64) -> Int64 {
+    func random64(upper_bound: Int32) -> Int32 {
         // Generate 64-bit random value in a range that is
         // divisible by upper_bound:
-        let range = Int64.max - Int64.max % upper_bound
-        var rnd : Int64 = 0
+        let range = Int32.max - Int32.max % upper_bound
+        var rnd : Int32 = 0
         repeat {
             arc4random_buf(&rnd, sizeofValue(rnd))
         } while rnd >= range
@@ -341,7 +342,7 @@ extension ViewController {
         self.printInConsoleController("Generating Double Values Start: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
         
-        for _ in 1...100000 {
+        for _ in 1...10000000 {
             let randomNum = self.randomDouble(DBL_MAX)
             self.dataArray.append("\(randomNum)")
         }
@@ -493,14 +494,25 @@ extension ViewController {
         
         self.printInConsoleController("Sum begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
-//            var sum = Double()
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
-                    _ = Double(data[i] as! Int) + Double(data[i] as! Int)
+                    _ = (data[i] as! Int) + (data[i] as! Int)
                     break
                 }
-                _ = Double(data[i] as! Int) + Double(data[i + 1] as! Int)
+                _ = (data[i] as! Int) + (data[i + 1] as! Int)
             }
+        } else {
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    _ = (data[i] as! Double) + (data[i] as! Double)
+                    break
+                }
+                _ = (data[i] as! Double) + (data[i + 1] as! Double)
+            }
+        }
+        
+        
         
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
@@ -522,15 +534,23 @@ extension ViewController {
         
         self.printInConsoleController("Mult begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
-        
-            var sum = Double()
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
-                    sum = Double(data[i] as! Int) * Double(data[i] as! Int)
+                    _ = (data[i] as! Double) * (data[i] as! Double)
                     break
                 }
-                sum = Double(data[i] as! Int) * Double(data[i + 1] as! Int)
+                _ = (data[i] as! Double) * (data[i + 1] as! Double)
             }
+        } else {
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    _ = (data[i] as! Double) * (data[i] as! Double)
+                    break
+                }
+                _ = (data[i] as! Double) * (data[i + 1] as! Double)
+            }
+        }
         
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
@@ -554,15 +574,23 @@ extension ViewController {
         
         self.printInConsoleController("Div begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
-        
-            var sum = Double()
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
-                    sum = Double(data[i] as! Int) / Double(data[i] as! Int)
+                    _ = (data[i] as! Int)  / (data[i] as! Int)
                     break
                 }
-                sum = Double(data[i] as! Int) / Double(data[i + 1] as! Int)
+                _ = (data[i] as! Int) / (data[i + 1] as! Int)
             }
+        } else {
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    _ = (data[i] as! Double) / (data[i] as! Double)
+                    break
+                }
+                _ = (data[i] as! Double) / (data[i + 1] as! Double)
+            }
+        }
         
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
@@ -586,15 +614,23 @@ extension ViewController {
         
         self.printInConsoleController("Substraction begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
-        
-            var sum = Double()
+        if (comboBox.objectValueOfSelectedItem as! String) == "Integer" {
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
-                    sum = Double(data[i] as! Int) - Double(data[i] as! Int)
+                    _ = (data[i] as! Int) - (data[i] as! Int)
                     break
                 }
-                sum = Double(data[i] as! Int) - Double(data[i + 1] as! Int)
+                _ = (data[i] as! Int) - (data[i + 1] as! Int)
             }
+        } else {
+            for i in 0...(data.count - 1) {
+                if (i + 1) == data.count {
+                    _ = (data[i] as! Double) - (data[i] as! Double)
+                    break
+                }
+                _ = (data[i] as! Double) - (data[i + 1] as! Double)
+            }
+        }
         
         let date2 = NSDate()
         let calendar2 = NSCalendar.currentCalendar()
