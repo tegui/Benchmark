@@ -48,7 +48,6 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
 //        FIRST STEP, GENERATE N RANDOM NUMBERS
 
         randomGenerateButton.target = self
@@ -57,7 +56,8 @@ class ViewController: NSViewController {
         randomGenerateButtomDouble.target = self
         randomGenerateButtomDouble.action = #selector(generateDoubleNumbers)
         
-        
+        print(Int.max)
+        print(Int64.max)
 //        SECOND STEP, SAVE AND LOAD
         
         saveDataButton.target = self
@@ -246,6 +246,7 @@ extension ViewController {
             self.mult(readedDataArrayForDouble)
             self.div(readedDataArrayForDouble)
             self.quickSortLaunch(readedDataArrayForDouble)
+            self.arcTan(readedDataArrayForDouble)
         }
         
         
@@ -340,7 +341,7 @@ extension ViewController {
         self.printInConsoleController("Generating Double Values Start: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
         
-        for _ in 1...10000000 {
+        for _ in 1...100000 {
             let randomNum = self.randomDouble(DBL_MAX)
             self.dataArray.append("\(randomNum)")
         }
@@ -470,7 +471,7 @@ extension ViewController {
     func quicksort<T: Comparable>(_ a: [T]) -> [T] {
         guard a.count > 1 else { return a }
         
-        let pivot = a[1]
+        let pivot = a[a.count - 1]
         let less = a.filter { $0 < pivot }
         let equal = a.filter { $0 == pivot }
         let greater = a.filter { $0 > pivot }
@@ -492,13 +493,13 @@ extension ViewController {
         
         self.printInConsoleController("Sum begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
-            var sum = Double()
+//            var sum = Double()
             for i in 0...(data.count - 1) {
                 if (i + 1) == data.count {
-                    sum = Double(data[i] as! Int) + Double(data[i] as! Int)
+                    _ = Double(data[i] as! Int) + Double(data[i] as! Int)
                     break
                 }
-                sum = Double(data[i] as! Int) + Double(data[i + 1] as! Int)
+                _ = Double(data[i] as! Int) + Double(data[i + 1] as! Int)
             }
         
         let date2 = NSDate()
@@ -603,6 +604,28 @@ extension ViewController {
         
         self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
         
+    }
+    
+    func arcTan(data: [AnyObject]) {
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("\n@@@@ Begining arcTan -------------\n")
+        
+        self.printInConsoleController("arcTan begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
+        
+        for i in 0...(data.count - 1) {
+            _ = atan((data[i]) as! Double) * 180 / M_PI
+        }
+        
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
+        
+        self.printInConsoleController("arcTan Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
+        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
     }
     
 }
