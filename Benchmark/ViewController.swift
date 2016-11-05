@@ -127,15 +127,18 @@ class ViewController: NSViewController {
         return rnd % upper_bound
     }
 
-    
-    
-    
 }
 
 
 extension ViewController {
 
     func writeFile() {
+        
+        let date1 = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date1)
+        
+        self.printInConsoleController("Writing File begins: \(date1) | \(components.hour):\(components.minute):\(components.second):\(components.nanosecond)")
         
         
         let strings = dataArray
@@ -162,12 +165,13 @@ extension ViewController {
             }
         }
         
+        let date2 = NSDate()
+        let calendar2 = NSCalendar.currentCalendar()
+        let components2 = calendar2.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: date2)
         
+        self.printInConsoleController("Writing File Ends: \(date2) | \(components2.hour):\(components2.minute):\(components2.second):\(components2.nanosecond)")
         
-        
-        
-        
-        
+        self.printInConsoleController("difference: \(date2.hoursFrom(date1)):\(date2.minutesFrom(date1)):\(date2.secondsFrom(date1)):\(date2.nanoSecondsFrom(date1))")
     }
     
     
@@ -193,7 +197,7 @@ extension ViewController {
         let appStartCal = NSCalendar.currentCalendar()
         let comp = appStartCal.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: appStartDate!)
         self.printInConsoleController("\n-----STARTING APP TEST------")
-        self.printInConsoleController("reading data begins: \(appStartDate!) | \(comp.hour):\(comp.minute):\(comp.second):\(comp.nanosecond)")
+        self.printInConsoleController("App Starting: \(appStartDate!) | \(comp.hour):\(comp.minute):\(comp.second):\(comp.nanosecond)")
         
         
         let date1 = NSDate()
@@ -256,7 +260,7 @@ extension ViewController {
         let appEndsCal = NSCalendar.currentCalendar()
         let comp2 = appEndsCal.components([.Hour, .Minute, .Second, .Nanosecond], fromDate: appEndsDate!)
         self.printInConsoleController("\n-----ENDING APP TEST------")
-        self.printInConsoleController("reading data Ending: \(appEndsDate!) | \(comp2.hour):\(comp2.minute):\(comp2.second):\(comp2.nanosecond)")
+        self.printInConsoleController("App Ending: \(appEndsDate!) | \(comp2.hour):\(comp2.minute):\(comp2.second):\(comp2.nanosecond)")
         
         
         
@@ -304,18 +308,6 @@ extension NSDate {
     }
     func nanoSecondsFrom(date: NSDate) -> Int {
         return NSCalendar.currentCalendar().components(.Nanosecond, fromDate: date, toDate: self, options: []).nanosecond
-    }
-    
-    func offsetFrom(date: NSDate) -> String {
-        if yearsFrom(date)   > 0 { return "\(yearsFrom(date))y"   }
-        if monthsFrom(date)  > 0 { return "\(monthsFrom(date))M"  }
-        if weeksFrom(date)   > 0 { return "\(weeksFrom(date))w"   }
-        if daysFrom(date)    > 0 { return "\(daysFrom(date))d"    }
-        if hoursFrom(date)   > 0 { return "\(hoursFrom(date))h"   }
-        if minutesFrom(date) > 0 { return "\(minutesFrom(date))m" }
-        if secondsFrom(date) > 0 { return "\(secondsFrom(date))s" }
-        if nanoSecondsFrom(date) > 0 {return "\(nanoSecondsFrom(date))ns"}
-        return ""
     }
 }
 
